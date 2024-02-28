@@ -1,6 +1,7 @@
 import User from "../models/userModels.js"
 import {StatusCodes} from 'http-status-codes'
 
+//Get all users data
 export const allUsers= async (req, res) => {
     const { page = 1, limit = 10 } = req.query;
   
@@ -15,6 +16,7 @@ export const allUsers= async (req, res) => {
     }
   };
 
+//creating users
 export const createUser = async (req, res) => {
     const { name, email, age } = req.body
     const user = await User.create({ name, email, age })
@@ -24,6 +26,7 @@ export const createUser = async (req, res) => {
     res.status(StatusCodes.CREATED).json({ user })
 }
 
+//Get a particular users data by passing id
 export const getUser = async (req, res) => {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -33,6 +36,7 @@ export const getUser = async (req, res) => {
     res.status(StatusCodes.OK).json({ user });
 };
 
+//update the particular user data by id
 export const updateUser = async (req, res) => {
     const {id} = req.params;
     const {name, email,age} = req.body
@@ -44,6 +48,7 @@ export const updateUser = async (req, res) => {
 
 }
 
+//delete the particular user by their id
 export const deleteUser = async (req, res) => {
     const { id } = req.params;
     const user = await User.findByIdAndDelete(id);
